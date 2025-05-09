@@ -1,0 +1,26 @@
+name: Deploy MLB HR Predictor
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          pip install -r requirements.txt
+          streamlit run app.py --server.headless true &
+          sleep 15
+          python -c "from prediction_model import get_daily_predictions; get_daily_predictions().to_csv('top_100_hr_predictions.csv', index=False)"
+      - run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add top_100_hr_predictions.csv
+          git commit -m "Auto-upload: HR predictions"
+          git push || echo "No changes"
