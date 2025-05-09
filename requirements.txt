@@ -1,0 +1,9 @@
+beautifulsoup4>=4.13.4
+mlb-statsapi>=1.9.0
+numpy>=2.2.5
+pandas>=2.2.3
+plotly>=6.0.1
+psycopg2-binary>=2.9.10
+requests>=2.32.3
+sqlalchemy>=2.0.40
+streamlit>=1.45.0
