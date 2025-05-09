@@ -1,0 +1,4 @@
+pybaseball>=2.3.10
+fake-useragent>=1.5.1
+statsapi>=0.5.0
+redis>=5.0.1
